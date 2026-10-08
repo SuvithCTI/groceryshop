@@ -1,0 +1,134 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply bg-slate-50 text-slate-900 font-sans selection:bg-orange-500 selection:text-white antialiased overflow-x-hidden;
+  }
+}
+
+/* Custom modern scrollbars */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #f1f5f9;
+}
+::-webkit-scrollbar-thumb {
+  background: #fed7aa;
+  border-radius: 9999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #fb923c;
+}
+
+/* Glassmorphism styles */
+.glass-panel {
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.6);
+}
+
+.glass-dark {
+  background: rgba(15, 23, 42, 0.85);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.glass-nav {
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid rgba(226, 232, 240, 0.8);
+}
+
+/* Animated gradient background */
+.gradient-mesh-hero {
+  background-color: #fff7ed;
+  background-image:
+    radial-gradient(at 10% 20%, rgba(249, 115, 22, 0.14) 0px, transparent 50%),
+    radial-gradient(at 90% 10%, rgba(245, 158, 11, 0.12) 0px, transparent 50%),
+    radial-gradient(at 80% 80%, rgba(244, 63, 94, 0.12) 0px, transparent 50%),
+    radial-gradient(at 20% 80%, rgba(251, 146, 60, 0.12) 0px, transparent 50%);
+}
+
+.gradient-orange-radial {
+  background: radial-gradient(circle at center, rgba(249, 115, 22, 0.12) 0%, rgba(255, 255, 255, 0) 70%);
+}
+
+/* Shimmer animation utility */
+.shimmer-badge {
+  background: linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.4) 50%, rgba(255,255,255,0) 100%);
+  background-size: 200% 100%;
+  animation: shimmer 2.5s infinite;
+}
+
+/* Floating animations */
+@keyframes floatY {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  50% { transform: translateY(-10px) rotate(1deg); }
+}
+
+@keyframes floatSlow {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  50% { transform: translateY(-16px) rotate(-2deg); }
+}
+
+.animate-float-card {
+  animation: floatY 4s ease-in-out infinite;
+}
+
+.animate-float-slow {
+  animation: floatSlow 6s ease-in-out infinite;
+}
+
+/* 3D Showcase Carousel styles */
+.perspective-stage {
+  perspective: 1400px;
+  perspective-origin: 50% 50%;
+}
+
+.showcase-card {
+  transform-style: preserve-3d;
+  transition: all 0.65s cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: transform, opacity, filter;
+}
+
+.showcase-card-left {
+  transform: translateX(-18%) scale(0.86) rotateY(16deg);
+  opacity: 0.55;
+  filter: brightness(0.85);
+  z-index: 10;
+  cursor: pointer;
+}
+
+.showcase-card-left:hover {
+  opacity: 0.85;
+  filter: brightness(0.98);
+  transform: translateX(-15%) scale(0.89) rotateY(12deg);
+}
+
+.showcase-card-center {
+  transform: translateX(0%) scale(1) rotateY(0deg);
+  opacity: 1;
+  filter: brightness(1);
+  z-index: 30;
+}
+
+.showcase-card-right {
+  transform: translateX(18%) scale(0.86) rotateY(-16deg);
+  opacity: 0.55;
+  filter: brightness(0.85);
+  z-index: 10;
+  cursor: pointer;
+}
+
+.showcase-card-right:hover {
+  opacity: 0.85;
+  filter: brightness(0.98);
+  transform: translateX(15%) scale(0.89) rotateY(-12deg);
+}
