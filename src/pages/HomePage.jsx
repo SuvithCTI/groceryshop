@@ -570,21 +570,21 @@ export const HomePage = () => {
 
       {/* 6. REALTIME CUSTOMER REVIEWS */}
       <section className="w-full max-w-[96%] xl:max-w-[1550px] mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="bg-gradient-to-b from-[#f6f0e8] via-[#fbf7f1] to-[#f2eae0] rounded-3xl p-6 sm:p-10 border border-stone-300/80 shadow-sm relative overflow-hidden">
+        <div className="bg-gradient-to-b from-[#f6f0e8] via-[#fbf7f1] to-[#f2eae0] rounded-3xl p-4 py-5 sm:p-10 border border-stone-300/80 shadow-sm relative overflow-hidden">
           
           {/* Subtle warm ambient glow */}
           <div className="absolute top-0 right-1/4 w-72 h-72 bg-orange-200/30 rounded-full blur-3xl pointer-events-none"></div>
           <div className="absolute bottom-0 left-1/4 w-72 h-72 bg-amber-200/30 rounded-full blur-3xl pointer-events-none"></div>
 
-          <div className="text-center max-w-2xl mx-auto mb-8 sm:mb-10 relative z-10">
-            <div className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-white border border-stone-300/80 text-orange-800 text-[11px] font-black uppercase tracking-wider mb-2 shadow-xs">
-              <CheckCircle2 className="w-3.5 h-3.5 text-orange-600" />
+          <div className="text-center max-w-2xl mx-auto mb-4 sm:mb-10 relative z-10">
+            <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 sm:px-3.5 sm:py-1 rounded-full bg-white border border-stone-300/80 text-orange-800 text-[10px] sm:text-[11px] font-black uppercase tracking-wider mb-1.5 shadow-xs">
+              <CheckCircle2 className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-orange-600" />
               <span>Live Verified Feedback</span>
             </div>
-            <h2 className="font-display font-black text-2xl sm:text-3xl text-stone-900 mt-1">
+            <h2 className="font-display font-black text-xl sm:text-3xl text-stone-900 mt-0.5">
               Realtime Customer Reviews
             </h2>
-            <p className="text-xs sm:text-sm text-stone-600 mt-1">
+            <p className="text-[11px] sm:text-sm text-stone-600 mt-0.5">
               Recent verified WhatsApp grocery deliveries from customers in your area
             </p>
           </div>
@@ -597,29 +597,29 @@ export const HomePage = () => {
                 return (
                   <div
                     key={t.id}
-                    className="bg-white p-5 rounded-3xl border border-stone-200 shadow-sm transition-all duration-500 flex flex-col justify-between min-h-[220px]"
+                    className="bg-white p-4 rounded-2xl border border-stone-200 shadow-sm transition-all duration-500 flex flex-col justify-between"
                   >
                     <div>
                       {/* Rating Stars & Timestamp */}
-                      <div className="flex items-center justify-between gap-2 mb-3">
-                        <div className="flex items-center gap-1 text-amber-400">
+                      <div className="flex items-center justify-between gap-2 mb-2">
+                        <div className="flex items-center gap-0.5 text-amber-400">
                           {[...Array(t.rating)].map((_, i) => (
-                            <Star key={i} className="w-4 h-4 fill-amber-400" />
+                            <Star key={i} className="w-3.5 h-3.5 fill-amber-400" />
                           ))}
                         </div>
-                        <span className="text-[11px] font-bold text-orange-700 bg-orange-50 border border-orange-200/70 px-2 py-0.5 rounded-full">
+                        <span className="text-[10px] font-bold text-orange-700 bg-orange-50 border border-orange-200/70 px-1.5 py-0.5 rounded-full">
                           {t.timeAgo}
                         </span>
                       </div>
 
                       {/* Review Comment */}
-                      <p className="text-slate-800 text-xs sm:text-sm leading-relaxed font-normal not-italic">
+                      <p className="text-slate-800 text-xs leading-relaxed font-normal not-italic">
                         {t.comment}
                       </p>
 
                       {/* Ordered Item Tag */}
                       {t.orderedItem && (
-                        <div className="mt-3.5 pt-2.5 border-t border-slate-100 flex items-center gap-1.5 text-[11px] text-slate-500 font-medium">
+                        <div className="mt-2.5 pt-2 border-t border-slate-100 flex items-center gap-1.5 text-[10px] text-slate-500 font-medium">
                           <span className="font-semibold text-slate-700">Ordered:</span>
                           <span className="truncate">{t.orderedItem}</span>
                         </div>
@@ -627,19 +627,19 @@ export const HomePage = () => {
                     </div>
 
                     {/* Customer Identity & Prev/Next Arrows */}
-                    <div className="flex items-center justify-between mt-4 pt-3.5 border-t border-slate-100">
-                      <div className="flex items-center gap-3 min-w-0">
-                        <div className={`w-9 h-9 rounded-2xl ${t.badgeBg} text-white font-bold text-xs flex items-center justify-center shrink-0 shadow-sm font-sans tracking-wide`}>
+                    <div className="flex items-center justify-between mt-3 pt-2.5 border-t border-slate-100">
+                      <div className="flex items-center gap-2.5 min-w-0">
+                        <div className={`w-8 h-8 rounded-xl ${t.badgeBg} text-white font-bold text-xs flex items-center justify-center shrink-0 shadow-sm font-sans tracking-wide`}>
                           {t.initials}
                         </div>
                         <div className="min-w-0">
                           <div className="flex items-center gap-1.5">
-                            <h4 className="font-bold text-xs sm:text-sm text-slate-900 truncate">{t.name}</h4>
-                            <span className="inline-flex items-center text-[10px] font-bold text-orange-700 bg-orange-50 px-1.5 py-0.2 rounded border border-orange-200 shrink-0">
+                            <h4 className="font-bold text-xs text-slate-900 truncate">{t.name}</h4>
+                            <span className="inline-flex items-center text-[9px] font-bold text-orange-700 bg-orange-50 px-1 py-0.2 rounded border border-orange-200 shrink-0">
                               Verified
                             </span>
                           </div>
-                          <p className="text-[11px] text-slate-400 truncate">{t.location}</p>
+                          <p className="text-[10px] text-slate-400 truncate">{t.location}</p>
                         </div>
                       </div>
 
@@ -648,18 +648,18 @@ export const HomePage = () => {
                         <button
                           type="button"
                           onClick={() => setActiveReviewIndex(prev => (prev - 1 + TESTIMONIALS.length) % TESTIMONIALS.length)}
-                          className="w-7 h-7 rounded-full bg-stone-100 hover:bg-stone-200 flex items-center justify-center text-stone-600 active:scale-95 transition"
+                          className="w-6 h-6 rounded-full bg-stone-100 hover:bg-stone-200 flex items-center justify-center text-stone-600 active:scale-95 transition"
                           aria-label="Previous review"
                         >
-                          <ChevronLeft className="w-4 h-4" />
+                          <ChevronLeft className="w-3.5 h-3.5" />
                         </button>
                         <button
                           type="button"
                           onClick={() => setActiveReviewIndex(prev => (prev + 1) % TESTIMONIALS.length)}
-                          className="w-7 h-7 rounded-full bg-stone-100 hover:bg-stone-200 flex items-center justify-center text-stone-600 active:scale-95 transition"
+                          className="w-6 h-6 rounded-full bg-stone-100 hover:bg-stone-200 flex items-center justify-center text-stone-600 active:scale-95 transition"
                           aria-label="Next review"
                         >
-                          <ChevronRight className="w-4 h-4" />
+                          <ChevronRight className="w-3.5 h-3.5" />
                         </button>
                       </div>
                     </div>
@@ -669,14 +669,14 @@ export const HomePage = () => {
             </div>
 
             {/* Pagination Indicators */}
-            <div className="flex items-center justify-center gap-2 mt-4">
+            <div className="flex items-center justify-center gap-1.5 mt-2.5">
               {TESTIMONIALS.map((_, idx) => (
                 <button
                   key={idx}
                   type="button"
                   onClick={() => setActiveReviewIndex(idx)}
                   className={`h-1.5 rounded-full transition-all duration-300 ${
-                    activeReviewIndex === idx ? 'w-6 bg-orange-600' : 'w-2 bg-stone-300 hover:bg-stone-400'
+                    activeReviewIndex === idx ? 'w-5 bg-orange-600' : 'w-1.5 bg-stone-300 hover:bg-stone-400'
                   }`}
                   aria-label={`Go to review ${idx + 1}`}
                 />
