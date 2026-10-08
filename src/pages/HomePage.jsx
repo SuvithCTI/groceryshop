@@ -139,6 +139,7 @@ export const HomePage = () => {
   } = useStore();
 
   const [activeSlide, setActiveSlide] = useState(0);
+  const [activeReviewIndex, setActiveReviewIndex] = useState(0);
   const [timeLeft, setTimeLeft] = useState({ hours: 8, minutes: 42, seconds: 19 });
 
   // Auto rotate hero slides every 5.5 seconds
@@ -147,6 +148,14 @@ export const HomePage = () => {
       setActiveSlide(prev => (prev + 1) % EDITORIAL_SHOWCASES.length);
     }, 5500);
     return () => clearInterval(slideTimer);
+  }, []);
+
+  // Auto rotate reviews on mobile every 4 seconds
+  useEffect(() => {
+    const reviewTimer = setInterval(() => {
+      setActiveReviewIndex(prev => (prev + 1) % TESTIMONIALS.length);
+    }, 4000);
+    return () => clearInterval(reviewTimer);
   }, []);
 
   useEffect(() => {
@@ -580,7 +589,103 @@ export const HomePage = () => {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-5 sm:gap-6 relative z-10">
+          {/* Mobile View: 1 Col 1 Row Auto-Moving Reviews Carousel */}
+          <div className="md:hidden relative z-10">
+            <div className="relative overflow-hidden">
+              {(() => {
+                const t = TESTIMONIALS[activeReviewIndex];
+                return (
+                  <div
+                    key={t.id}
+                    className="bg-white p-5 rounded-3xl border border-stone-200 shadow-sm transition-all duration-500 flex flex-col justify-between min-h-[220px]"
+                  >
+                    <div>
+                      {/* Rating Stars & Timestamp */}
+                      <div className="flex items-center justify-between gap-2 mb-3">
+                        <div className="flex items-center gap-1 text-amber-400">
+                          {[...Array(t.rating)].map((_, i) => (
+                            <Star key={i} className="w-4 h-4 fill-amber-400" />
+                          ))}
+                        </div>
+                        <span className="text-[11px] font-bold text-orange-700 bg-orange-50 border border-orange-200/70 px-2 py-0.5 rounded-full">
+                          {t.timeAgo}
+                        </span>
+                      </div>
+
+                      {/* Review Comment */}
+                      <p className="text-slate-800 text-xs sm:text-sm leading-relaxed font-normal not-italic">
+                        {t.comment}
+                      </p>
+
+                      {/* Ordered Item Tag */}
+                      {t.orderedItem && (
+                        <div className="mt-3.5 pt-2.5 border-t border-slate-100 flex items-center gap-1.5 text-[11px] text-slate-500 font-medium">
+                          <span className="font-semibold text-slate-700">Ordered:</span>
+                          <span className="truncate">{t.orderedItem}</span>
+                        </div>
+                      )}
+                    </div>
+
+                    {/* Customer Identity & Prev/Next Arrows */}
+                    <div className="flex items-center justify-between mt-4 pt-3.5 border-t border-slate-100">
+                      <div className="flex items-center gap-3 min-w-0">
+                        <div className={`w-9 h-9 rounded-2xl ${t.badgeBg} text-white font-bold text-xs flex items-center justify-center shrink-0 shadow-sm font-sans tracking-wide`}>
+                          {t.initials}
+                        </div>
+                        <div className="min-w-0">
+                          <div className="flex items-center gap-1.5">
+                            <h4 className="font-bold text-xs sm:text-sm text-slate-900 truncate">{t.name}</h4>
+                            <span className="inline-flex items-center text-[10px] font-bold text-orange-700 bg-orange-50 px-1.5 py-0.2 rounded border border-orange-200 shrink-0">
+                              Verified
+                            </span>
+                          </div>
+                          <p className="text-[11px] text-slate-400 truncate">{t.location}</p>
+                        </div>
+                      </div>
+
+                      {/* Manual Next / Prev Buttons */}
+                      <div className="flex items-center gap-1 shrink-0 ml-2">
+                        <button
+                          type="button"
+                          onClick={() => setActiveReviewIndex(prev => (prev - 1 + TESTIMONIALS.length) % TESTIMONIALS.length)}
+                          className="w-7 h-7 rounded-full bg-stone-100 hover:bg-stone-200 flex items-center justify-center text-stone-600 active:scale-95 transition"
+                          aria-label="Previous review"
+                        >
+                          <ChevronLeft className="w-4 h-4" />
+                        </button>
+                        <button
+                          type="button"
+                          onClick={() => setActiveReviewIndex(prev => (prev + 1) % TESTIMONIALS.length)}
+                          className="w-7 h-7 rounded-full bg-stone-100 hover:bg-stone-200 flex items-center justify-center text-stone-600 active:scale-95 transition"
+                          aria-label="Next review"
+                        >
+                          <ChevronRight className="w-4 h-4" />
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                );
+              })()}
+            </div>
+
+            {/* Pagination Indicators */}
+            <div className="flex items-center justify-center gap-2 mt-4">
+              {TESTIMONIALS.map((_, idx) => (
+                <button
+                  key={idx}
+                  type="button"
+                  onClick={() => setActiveReviewIndex(idx)}
+                  className={`h-1.5 rounded-full transition-all duration-300 ${
+                    activeReviewIndex === idx ? 'w-6 bg-orange-600' : 'w-2 bg-stone-300 hover:bg-stone-400'
+                  }`}
+                  aria-label={`Go to review ${idx + 1}`}
+                />
+              ))}
+            </div>
+          </div>
+
+          {/* Desktop View: 3-Column Reviews Grid */}
+          <div className="hidden md:grid md:grid-cols-3 gap-5 sm:gap-6 relative z-10">
             {TESTIMONIALS.map((t) => (
               <div
                 key={t.id}
