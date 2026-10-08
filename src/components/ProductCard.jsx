@@ -96,20 +96,20 @@ export const ProductCard = ({ product }) => {
         </div>
 
         {/* Price & Action Section */}
-        <div className="mt-2.5 sm:mt-3 pt-2 sm:pt-2.5 border-t border-slate-100 flex items-center justify-between gap-1.5">
-          <div className="min-w-0">
-            <div className="flex items-baseline gap-1">
-              <span className="text-sm sm:text-lg font-black text-slate-900 font-display truncate">
+        <div className="mt-2.5 sm:mt-3 pt-2 sm:pt-2.5 border-t border-slate-100 flex items-center justify-between gap-1 sm:gap-2">
+          <div className="flex-1 min-w-0 pr-1">
+            <div className="flex items-baseline flex-wrap gap-x-1 gap-y-0 leading-tight">
+              <span className="text-sm sm:text-base md:text-lg font-black text-slate-900 font-display shrink-0 whitespace-nowrap">
                 {storeConfig.currency}{product.price.toFixed(0)}
               </span>
               {product.originalPrice > product.price && (
-                <span className="text-[10px] sm:text-xs text-slate-400 line-through">
+                <span className="text-[10px] sm:text-xs text-slate-400 line-through shrink-0 whitespace-nowrap">
                   {storeConfig.currency}{product.originalPrice.toFixed(0)}
                 </span>
               )}
             </div>
             {product.shelfLife && (
-              <span className="text-[9px] sm:text-[10px] text-slate-400 block truncate">
+              <span className="text-[9px] sm:text-[10px] text-slate-400 block truncate mt-0.5">
                 Fresh: {product.shelfLife}
               </span>
             )}
@@ -126,7 +126,7 @@ export const ProductCard = ({ product }) => {
                 >
                   <Minus className="w-3 sm:w-3.5 h-3 sm:h-3.5" />
                 </button>
-                <span className="px-1.5 sm:px-2 text-[11px] sm:text-xs font-black min-w-[16px] sm:min-w-[20px] text-center">
+                <span className="px-1 sm:px-2 text-[11px] sm:text-xs font-black min-w-[14px] sm:min-w-[20px] text-center">
                   {cartItem.quantity}
                 </span>
                 <button
@@ -140,9 +140,9 @@ export const ProductCard = ({ product }) => {
             ) : (
               <button
                 onClick={() => addToCart(product, 1)}
-                className="flex items-center gap-1 bg-orange-50 hover:bg-orange-600 text-orange-800 hover:text-white font-extrabold text-[11px] sm:text-xs px-2.5 sm:px-3.5 py-1.5 sm:py-2.5 rounded-xl sm:rounded-2xl border border-orange-200/80 hover:border-transparent transition-all duration-200 shadow-xs hover:shadow-md active:scale-95 shrink-0"
+                className="flex items-center gap-0.5 sm:gap-1 bg-orange-50 hover:bg-orange-600 text-orange-800 hover:text-white font-extrabold text-[11px] sm:text-xs px-2 sm:px-3.5 py-1.5 sm:py-2 rounded-xl sm:rounded-2xl border border-orange-200/80 hover:border-transparent transition-all duration-200 shadow-xs hover:shadow-md active:scale-95 shrink-0"
               >
-                <Plus className="w-3.5 sm:w-4 h-3.5 sm:h-4 stroke-[2.5]" />
+                <Plus className="w-3 sm:w-4 h-3 sm:h-4 stroke-[2.5]" />
                 <span>Add</span>
               </button>
             )
