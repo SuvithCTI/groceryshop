@@ -9,7 +9,6 @@ import {
   Plus,
   Edit3,
   Trash2,
-  X,
   Search,
   TrendingUp,
   AlertTriangle,
@@ -17,11 +16,9 @@ import {
   Sparkles,
   Lock,
   User,
-  Mail,
   KeyRound,
   LogOut,
   ArrowLeft,
-  CheckCircle2,
   ShieldCheck
 } from 'lucide-react';
 

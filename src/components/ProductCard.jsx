@@ -1,6 +1,6 @@
 import React from 'react';
 import { useStore } from '../context/StoreContext';
-import { Star, Plus, Minus, Heart, Eye, ShoppingCart, Check, Zap, Sparkles } from 'lucide-react';
+import { Star, Plus, Minus, Heart, Eye } from 'lucide-react';
 
 export const ProductCard = ({ product }) => {
   const {

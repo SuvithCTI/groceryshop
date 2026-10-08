@@ -9,11 +9,7 @@ import {
   MessageCircle,
   Send,
   CheckCircle2,
-  HelpCircle,
-  ChevronDown,
-  Sparkles,
-  Store,
-  ShieldCheck
+  ChevronDown
 } from 'lucide-react';
 
 export const ContactPage = () => {

@@ -7,7 +7,7 @@ const StoreContext = createContext();
 
 export const StoreProvider = ({ children }) => {
   // 1. Products state with localStorage persistence & version sync
-  const DATA_VERSION = 'v13_all_images_in_single_folder';
+  const DATA_VERSION = 'v14_clean_production';
 
   const [products, setProducts] = useState(() => {
     try {
@@ -20,12 +20,7 @@ export const StoreProvider = ({ children }) => {
       }
       const saved = localStorage.getItem('freshmart_products');
       if (saved) {
-        const parsed = JSON.parse(saved);
-        if (parsed.length > 0 && parsed[0].price < 15) {
-          return INITIAL_PRODUCTS;
-        }
-        const filtered = parsed.filter(p => p.category !== 'organic-spices');
-        return filtered;
+        return JSON.parse(saved);
       }
       return INITIAL_PRODUCTS;
     } catch {
@@ -42,8 +37,7 @@ export const StoreProvider = ({ children }) => {
       }
       const saved = localStorage.getItem('freshmart_categories');
       if (saved) {
-        const parsed = JSON.parse(saved);
-        return parsed.filter(c => c.id !== 'organic-spices');
+        return JSON.parse(saved);
       }
       return INITIAL_CATEGORIES;
     } catch {
@@ -81,10 +75,6 @@ export const StoreProvider = ({ children }) => {
         if (!parsed.shopName || parsed.shopName.includes('FreshMart') || parsed.shopName.includes('FreshCart Groceries')) {
           parsed.shopName = 'FreshCart Market';
         }
-        if (parsed.deliveryFee < 10) {
-          parsed.deliveryFee = 40;
-          parsed.freeDeliveryThreshold = 499;
-        }
         return parsed;
       }
       return DEFAULT_STORE_CONFIG;
@@ -98,53 +88,9 @@ export const StoreProvider = ({ children }) => {
     try {
       const saved = localStorage.getItem('freshmart_orders');
       if (saved) {
-        const parsed = JSON.parse(saved);
-        if (parsed.length > 0 && parsed[0].total < 50) {
-          // migrate old USD demo orders to INR
-        } else {
-          return parsed;
-        }
+        return JSON.parse(saved);
       }
-      return [
-        {
-          id: "ORD-9842",
-          customerName: "Pooja Verma",
-          phone: "+91 98451 22901",
-          address: "Flat 402, Green Glen Layout, Bellandur, Bengaluru",
-          items: [
-            { name: "Fresh Organic Avocados (Hass)", quantity: 2, price: 180 },
-            { name: "Pure Farm-Fresh Cow Whole Milk", quantity: 1, price: 72 },
-            { name: "Artisanal Handcrafted Sourdough Loaf", quantity: 1, price: 160 }
-          ],
-          subtotal: 592,
-          deliveryFee: 0,
-          discount: 100,
-          total: 492,
-          paymentMethod: "Cash on Delivery",
-          status: "Delivered",
-          createdAt: new Date(Date.now() - 3600000 * 2).toISOString(),
-          notes: "Call when at security gate"
-        },
-        {
-          id: "ORD-9843",
-          customerName: "Karthik Nair",
-          phone: "+91 97402 88123",
-          address: "Villa 18, Palm Meadows, Whitefield, Bengaluru",
-          items: [
-            { name: "Royal Aged Extra-Long Basmati Rice", quantity: 1, price: 320 },
-            { name: "Cold-Pressed Extra Virgin Olive Oil", quantity: 1, price: 590 },
-            { name: "Crisp Organic Royal Apples (Shimla)", quantity: 2, price: 199 }
-          ],
-          subtotal: 1308,
-          deliveryFee: 0,
-          discount: 150,
-          total: 1158,
-          paymentMethod: "UPI (Google Pay / PhonePe)",
-          status: "In Transit",
-          createdAt: new Date(Date.now() - 3600000 * 0.5).toISOString(),
-          notes: "Leave at front door"
-        }
-      ];
+      return [];
     } catch {
       return [];
     }
@@ -155,28 +101,7 @@ export const StoreProvider = ({ children }) => {
     try {
       const saved = localStorage.getItem('freshmart_enquiries');
       if (saved) return JSON.parse(saved);
-      return [
-        {
-          id: "ENQ-101",
-          name: "Jessica Taylor",
-          email: "jessica.t@example.com",
-          phone: "+1 555-829-1920",
-          subject: "Bulk Organic Mangoes Inquiry",
-          message: "Hi! Do you offer bulk discounts for 20kg organic Alphonso / Honey mangoes for a family gathering this weekend?",
-          createdAt: new Date(Date.now() - 3600000 * 5).toISOString(),
-          status: "Pending"
-        },
-        {
-          id: "ENQ-102",
-          name: "Dr. Robert Sterling",
-          email: "rsterling@healthclinic.org",
-          phone: "+1 555-334-1188",
-          subject: "Regular Weekly Corporate Fruit Delivery",
-          message: "We would like to setup a weekly recurring delivery of fresh fruit boxes for our clinic staff every Monday morning.",
-          createdAt: new Date(Date.now() - 3600000 * 24).toISOString(),
-          status: "Replied"
-        }
-      ];
+      return [];
     } catch {
       return [];
     }
