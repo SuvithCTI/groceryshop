@@ -92,84 +92,87 @@ export const Footer = () => {
             </div>
           </div>
 
-          {/* 2. Popular Categories (3 cols) */}
-          <div className="lg:col-span-3 space-y-3">
-            <h4 className="text-xs font-black text-white uppercase tracking-widest font-display text-orange-400">
-              Categories
-            </h4>
-            <ul className="space-y-2 text-xs text-stone-400">
-              {categories.slice(1, 7).map(cat => (
-                <li key={cat.id}>
+          {/* 2 & 3. Categories & Quick Links (Side-by-side 2-column layout on mobile, individual columns on desktop) */}
+          <div className="grid grid-cols-2 gap-4 sm:gap-6 lg:contents">
+            {/* 2. Popular Categories */}
+            <div className="lg:col-span-3 space-y-3">
+              <h4 className="text-xs font-black text-white uppercase tracking-widest font-display text-orange-400">
+                Categories
+              </h4>
+              <ul className="space-y-2 text-xs text-stone-400">
+                {categories.slice(1, 7).map(cat => (
+                  <li key={cat.id}>
+                    <button
+                      onClick={() => {
+                        setSelectedCategory(cat.id);
+                        setActiveTab('products');
+                        window.scrollTo({ top: 0, behavior: 'smooth' });
+                      }}
+                      className="hover:text-orange-400 transition hover:translate-x-1 inline-block text-left"
+                    >
+                      {cat.name}
+                    </button>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            {/* 3. Navigation & Legal */}
+            <div className="lg:col-span-2 space-y-3">
+              <h4 className="text-xs font-black text-white uppercase tracking-widest font-display text-orange-400">
+                Quick Links
+              </h4>
+              <ul className="space-y-2 text-xs text-stone-400">
+                <li>
                   <button
-                    onClick={() => {
-                      setSelectedCategory(cat.id);
-                      setActiveTab('products');
-                      window.scrollTo({ top: 0, behavior: 'smooth' });
-                    }}
-                    className="hover:text-orange-400 transition hover:translate-x-1 inline-block"
+                    onClick={() => { setActiveTab('home'); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
+                    className="hover:text-orange-400 transition hover:translate-x-1 text-left"
                   >
-                    {cat.name}
+                    Home
                   </button>
                 </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* 3. Navigation & Legal (2 cols) */}
-          <div className="lg:col-span-2 space-y-3">
-            <h4 className="text-xs font-black text-white uppercase tracking-widest font-display text-orange-400">
-              Quick Links
-            </h4>
-            <ul className="space-y-2 text-xs text-stone-400">
-              <li>
-                <button
-                  onClick={() => { setActiveTab('home'); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
-                  className="hover:text-orange-400 transition hover:translate-x-1"
-                >
-                  Home
-                </button>
-              </li>
-              <li>
-                <button
-                  onClick={() => { setActiveTab('products'); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
-                  className="hover:text-orange-400 transition hover:translate-x-1"
-                >
-                  All Products
-                </button>
-              </li>
-              <li>
-                <button
-                  onClick={() => { setActiveTab('about'); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
-                  className="hover:text-orange-400 transition hover:translate-x-1"
-                >
-                  About Us
-                </button>
-              </li>
-              <li>
-                <button
-                  onClick={() => { setActiveTab('contact'); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
-                  className="hover:text-orange-400 transition hover:translate-x-1"
-                >
-                  Contact & Help
-                </button>
-              </li>
-              <li>
-                <button
-                  onClick={() => setActiveModal('privacy')}
-                  className="hover:text-orange-400 transition hover:translate-x-1"
-                >
-                  Privacy Policy
-                </button>
-              </li>
-              <li>
-                <button
-                  onClick={() => setActiveModal('terms')}
-                  className="hover:text-orange-400 transition hover:translate-x-1"
-                >
-                  Terms & Conditions
-                </button>
-              </li>
-            </ul>
+                <li>
+                  <button
+                    onClick={() => { setActiveTab('products'); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
+                    className="hover:text-orange-400 transition hover:translate-x-1 text-left"
+                  >
+                    All Products
+                  </button>
+                </li>
+                <li>
+                  <button
+                    onClick={() => { setActiveTab('about'); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
+                    className="hover:text-orange-400 transition hover:translate-x-1 text-left"
+                  >
+                    About Us
+                  </button>
+                </li>
+                <li>
+                  <button
+                    onClick={() => { setActiveTab('contact'); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
+                    className="hover:text-orange-400 transition hover:translate-x-1 text-left"
+                  >
+                    Contact & Help
+                  </button>
+                </li>
+                <li>
+                  <button
+                    onClick={() => setActiveModal('privacy')}
+                    className="hover:text-orange-400 transition hover:translate-x-1 text-left"
+                  >
+                    Privacy Policy
+                  </button>
+                </li>
+                <li>
+                  <button
+                    onClick={() => setActiveModal('terms')}
+                    className="hover:text-orange-400 transition hover:translate-x-1 text-left"
+                  >
+                    Terms & Conditions
+                  </button>
+                </li>
+              </ul>
+            </div>
           </div>
 
           {/* 4. Newsletter Subscribe (3 cols) */}
