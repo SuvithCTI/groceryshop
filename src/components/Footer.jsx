@@ -133,18 +133,18 @@ export const Footer = () => {
                 </li>
                 <li>
                   <button
-                    onClick={() => { setActiveTab('products'); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
-                    className="hover:text-orange-400 transition hover:translate-x-1 text-left"
-                  >
-                    All Products
-                  </button>
-                </li>
-                <li>
-                  <button
                     onClick={() => { setActiveTab('about'); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
                     className="hover:text-orange-400 transition hover:translate-x-1 text-left"
                   >
                     About Us
+                  </button>
+                </li>
+                <li>
+                  <button
+                    onClick={() => { setActiveTab('products'); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
+                    className="hover:text-orange-400 transition hover:translate-x-1 text-left"
+                  >
+                    All Products
                   </button>
                 </li>
                 <li>

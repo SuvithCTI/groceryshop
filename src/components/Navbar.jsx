@@ -175,6 +175,16 @@ export const Navbar = () => {
               Home
             </button>
             <button
+              onClick={() => handleNavClick('about')}
+              className={`px-3.5 py-2 rounded-xl text-sm font-semibold transition ${
+                activeTab === 'about'
+                  ? 'bg-orange-50 text-orange-700 font-bold'
+                  : 'text-slate-600 hover:text-orange-600 hover:bg-slate-100/70'
+              }`}
+            >
+              About Us
+            </button>
+            <button
               onClick={() => handleNavClick('products')}
               className={`px-3.5 py-2 rounded-xl text-sm font-semibold transition flex items-center gap-1.5 ${
                 activeTab === 'products'
@@ -184,16 +194,6 @@ export const Navbar = () => {
             >
               <ShoppingBasket className="w-4 h-4" />
               <span>Products</span>
-            </button>
-            <button
-              onClick={() => handleNavClick('about')}
-              className={`px-3.5 py-2 rounded-xl text-sm font-semibold transition ${
-                activeTab === 'about'
-                  ? 'bg-orange-50 text-orange-700 font-bold'
-                  : 'text-slate-600 hover:text-orange-600 hover:bg-slate-100/70'
-              }`}
-            >
-              About Us
             </button>
             <button
               onClick={() => handleNavClick('contact')}
@@ -273,15 +273,6 @@ export const Navbar = () => {
             <Sparkles className="w-4 h-4 text-orange-600" />
           </button>
           <button
-            onClick={() => handleNavClick('products')}
-            className={`w-full text-left px-4 py-3 rounded-xl text-sm font-bold flex items-center justify-between ${
-              activeTab === 'products' ? 'bg-orange-50 text-orange-800' : 'text-slate-700 hover:bg-slate-50'
-            }`}
-          >
-            <span>Shop Groceries ({products.length})</span>
-            <ShoppingBasket className="w-4 h-4 text-orange-600" />
-          </button>
-          <button
             onClick={() => handleNavClick('about')}
             className={`w-full text-left px-4 py-3 rounded-xl text-sm font-bold flex items-center justify-between ${
               activeTab === 'about' ? 'bg-orange-50 text-orange-800' : 'text-slate-700 hover:bg-slate-50'
@@ -289,6 +280,15 @@ export const Navbar = () => {
           >
             <span>About Our Store</span>
             <Sparkles className="w-4 h-4 text-amber-500" />
+          </button>
+          <button
+            onClick={() => handleNavClick('products')}
+            className={`w-full text-left px-4 py-3 rounded-xl text-sm font-bold flex items-center justify-between ${
+              activeTab === 'products' ? 'bg-orange-50 text-orange-800' : 'text-slate-700 hover:bg-slate-50'
+            }`}
+          >
+            <span>Shop Groceries ({products.length})</span>
+            <ShoppingBasket className="w-4 h-4 text-orange-600" />
           </button>
           <button
             onClick={() => handleNavClick('contact')}
