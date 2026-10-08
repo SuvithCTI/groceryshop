@@ -4,13 +4,11 @@ import { ProductFormModal } from '../components/ProductFormModal';
 import {
   LayoutDashboard,
   Package,
-  ShoppingBag,
   MessageSquare,
   Plus,
   Edit3,
   Trash2,
   Search,
-  TrendingUp,
   AlertTriangle,
   Phone,
   Sparkles,
@@ -26,7 +24,6 @@ export const AdminPage = () => {
   const {
     products,
     categories,
-    orders,
     enquiries,
     storeConfig,
     adminSubTab,
@@ -35,7 +32,6 @@ export const AdminPage = () => {
     updateProduct,
     deleteProduct,
     toggleProductStock,
-    updateOrderStatus,
     updateEnquiryStatus,
     showToast,
     setActiveTab
@@ -67,9 +63,7 @@ export const AdminPage = () => {
   });
 
   // Stats calculation
-  const totalRevenue = orders.reduce((sum, o) => sum + (o.total || 0), 0);
   const outOfStockCount = products.filter(p => !p.inStock).length;
-  const pendingOrdersCount = orders.filter(o => o.status.includes('Pending')).length;
   const pendingEnquiriesCount = enquiries.filter(e => e.status === 'Pending').length;
 
   const handleAuthSubmit = (e) => {
@@ -117,7 +111,7 @@ export const AdminPage = () => {
               Admin Sign In
             </h2>
             <p className="text-xs text-stone-500">
-              Enter your store manager credentials to access inventory & WhatsApp orders.
+              Enter your store manager credentials to access inventory & customer enquiries.
             </p>
           </div>
 
@@ -200,7 +194,7 @@ export const AdminPage = () => {
             {storeConfig.shopName} Dashboard
           </h1>
           <p className="text-xs sm:text-sm text-slate-400 mt-0.5 sm:mt-1">
-            Manage live inventory, categories, price updates, WhatsApp orders and customer queries
+            Manage live inventory, categories, price updates, and customer enquiries
           </p>
         </div>
 
@@ -236,7 +230,6 @@ export const AdminPage = () => {
         {[
           { id: 'overview', name: 'Overview', icon: LayoutDashboard },
           { id: 'products', name: `Products (${products.length})`, icon: Package },
-          { id: 'orders', name: `WhatsApp Orders (${orders.length})`, icon: ShoppingBag, badge: pendingOrdersCount },
           { id: 'enquiries', name: `Enquiries (${enquiries.length})`, icon: MessageSquare, badge: pendingEnquiriesCount }
         ].map((tab) => {
           const Icon = tab.icon;
@@ -288,27 +281,27 @@ export const AdminPage = () => {
 
             <div className="bg-white p-3.5 sm:p-6 rounded-2xl sm:rounded-3xl border border-slate-200/80 shadow-xs flex items-center justify-between gap-2">
               <div className="min-w-0">
-                <span className="text-[10px] sm:text-xs text-slate-400 font-bold uppercase tracking-wider block truncate">Total Sales</span>
+                <span className="text-[10px] sm:text-xs text-slate-400 font-bold uppercase tracking-wider block truncate">Categories</span>
                 <span className="font-display font-black text-xl sm:text-3xl text-slate-900 mt-0.5 sm:mt-1 block">
-                  {storeConfig.currency}{totalRevenue.toFixed(0)}
+                  {categories.length - 1}
                 </span>
-                <span className="text-[10px] sm:text-xs text-amber-600 font-semibold truncate block">{orders.length} orders logged</span>
+                <span className="text-[10px] sm:text-xs text-amber-600 font-semibold truncate block">Catalog Sections</span>
               </div>
               <div className="w-9 h-9 sm:w-12 sm:h-12 rounded-xl sm:rounded-2xl bg-amber-50 text-amber-600 flex items-center justify-center shrink-0">
-                <TrendingUp className="w-5 h-5 sm:w-6 sm:h-6" />
+                <Sparkles className="w-5 h-5 sm:w-6 sm:h-6" />
               </div>
             </div>
 
             <div className="bg-white p-3.5 sm:p-6 rounded-2xl sm:rounded-3xl border border-slate-200/80 shadow-xs flex items-center justify-between gap-2">
               <div className="min-w-0">
-                <span className="text-[10px] sm:text-xs text-slate-400 font-bold uppercase tracking-wider block truncate">Pending Orders</span>
+                <span className="text-[10px] sm:text-xs text-slate-400 font-bold uppercase tracking-wider block truncate">Enquiries</span>
                 <span className="font-display font-black text-xl sm:text-3xl text-slate-900 mt-0.5 sm:mt-1 block">
-                  {pendingOrdersCount}
+                  {enquiries.length}
                 </span>
-                <span className="text-[10px] sm:text-xs text-rose-500 font-semibold truncate block">Needs confirmation</span>
+                <span className="text-[10px] sm:text-xs text-rose-500 font-semibold truncate block">{pendingEnquiriesCount} Pending</span>
               </div>
               <div className="w-9 h-9 sm:w-12 sm:h-12 rounded-xl sm:rounded-2xl bg-rose-50 text-rose-600 flex items-center justify-center shrink-0">
-                <ShoppingBag className="w-5 h-5 sm:w-6 sm:h-6" />
+                <MessageSquare className="w-5 h-5 sm:w-6 sm:h-6" />
               </div>
             </div>
 
@@ -330,42 +323,42 @@ export const AdminPage = () => {
           {/* Quick Shortcuts & Activity Split */}
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-8">
 
-            {/* Recent Orders Preview */}
+            {/* Quick Catalog Shortcuts */}
             <div className="bg-white p-4 sm:p-6 rounded-2xl sm:rounded-3xl border border-slate-200/80 shadow-xs space-y-3 sm:space-y-4">
               <div className="flex items-center justify-between pb-3 border-b border-slate-100">
                 <h3 className="font-display font-extrabold text-sm sm:text-base text-slate-900">
-                  Recent WhatsApp Orders
+                  Quick Catalog Actions
                 </h3>
                 <button
-                  onClick={() => setAdminSubTab('orders')}
+                  onClick={() => setAdminSubTab('products')}
                   className="text-xs font-bold text-orange-700 hover:underline"
                 >
-                  View all ({orders.length})
+                  Manage Products ({products.length})
                 </button>
               </div>
 
-              <div className="divide-y divide-slate-100">
-                {orders.slice(0, 4).map(order => (
-                  <div key={order.id} className="py-2.5 sm:py-3 flex items-center justify-between gap-3">
-                    <div className="min-w-0">
-                      <div className="flex items-center gap-1.5 sm:gap-2">
-                        <span className="font-mono text-[11px] sm:text-xs font-bold text-slate-900">{order.id}</span>
-                        <span className="text-xs text-slate-600 truncate">• {order.customerName}</span>
-                      </div>
-                      <p className="text-[10px] sm:text-[11px] text-slate-400 mt-0.5">{order.items.length} items • {order.paymentMethod}</p>
-                    </div>
-                    <div className="text-right shrink-0">
-                      <span className="text-xs sm:text-sm font-black text-orange-800 font-display block">
-                        {storeConfig.currency}{order.total.toFixed(0)}
-                      </span>
-                      <span className={`text-[9px] sm:text-[10px] font-bold px-2 py-0.5 rounded-full inline-block mt-0.5 ${
-                        order.status === 'Delivered' ? 'bg-orange-100 text-orange-800' : 'bg-amber-100 text-amber-800'
-                      }`}>
-                        {order.status.replace('WhatsApp ', '')}
-                      </span>
-                    </div>
+              <div className="space-y-2 pt-1">
+                <button
+                  onClick={() => setIsAddModalOpen(true)}
+                  className="w-full p-3 bg-orange-50 hover:bg-orange-100 rounded-2xl border border-orange-200 text-orange-800 font-bold text-xs flex items-center justify-between transition"
+                >
+                  <div className="flex items-center gap-2">
+                    <Plus className="w-4 h-4" />
+                    <span>Add New Grocery Product</span>
                   </div>
-                ))}
+                  <span className="text-[10px] bg-white px-2 py-0.5 rounded-full border border-orange-200">New</span>
+                </button>
+
+                <button
+                  onClick={() => setAdminSubTab('products')}
+                  className="w-full p-3 bg-stone-50 hover:bg-stone-100 rounded-2xl border border-stone-200 text-stone-700 font-bold text-xs flex items-center justify-between transition"
+                >
+                  <div className="flex items-center gap-2">
+                    <Package className="w-4 h-4" />
+                    <span>View & Update Product Stock</span>
+                  </div>
+                  <span className="text-[10px] text-stone-500">{outOfStockCount} out of stock</span>
+                </button>
               </div>
             </div>
 
@@ -384,19 +377,23 @@ export const AdminPage = () => {
               </div>
 
               <div className="divide-y divide-slate-100">
-                {enquiries.slice(0, 4).map(enq => (
-                  <div key={enq.id} className="py-2.5 sm:py-3 space-y-1">
-                    <div className="flex items-center justify-between">
-                      <span className="font-bold text-xs text-slate-900">{enq.name}</span>
-                      <span className={`text-[9px] sm:text-[10px] font-bold px-2 py-0.5 rounded-full ${
-                        enq.status === 'Replied' ? 'bg-orange-100 text-orange-800' : 'bg-rose-100 text-rose-800'
-                      }`}>
-                        {enq.status}
-                      </span>
+                {enquiries.length === 0 ? (
+                  <p className="text-xs text-slate-400 py-4 text-center font-medium">No customer inquiries yet.</p>
+                ) : (
+                  enquiries.slice(0, 4).map(enq => (
+                    <div key={enq.id} className="py-2.5 sm:py-3 space-y-1">
+                      <div className="flex items-center justify-between">
+                        <span className="font-bold text-xs text-slate-900">{enq.name}</span>
+                        <span className={`text-[9px] sm:text-[10px] font-bold px-2 py-0.5 rounded-full ${
+                          enq.status === 'Replied' ? 'bg-orange-100 text-orange-800' : 'bg-rose-100 text-rose-800'
+                        }`}>
+                          {enq.status}
+                        </span>
+                      </div>
+                      <p className="text-xs text-slate-600 line-clamp-1">{enq.message}</p>
                     </div>
-                    <p className="text-xs text-slate-600 line-clamp-1">{enq.message}</p>
-                  </div>
-                ))}
+                  ))
+                )}
               </div>
             </div>
 
@@ -620,89 +617,7 @@ export const AdminPage = () => {
       )}
 
       {/* =========================================================
-          TAB 3: ORDERS & WHATSAPP LOGS
-         ========================================================= */}
-      {adminSubTab === 'orders' && (
-        <div className="bg-white rounded-2xl sm:rounded-3xl border border-slate-200/80 shadow-sm overflow-hidden animate-fade-in-up space-y-3 sm:space-y-4 p-3.5 sm:p-6">
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pb-3 sm:pb-4 border-b border-slate-100">
-            <div>
-              <h3 className="font-display font-extrabold text-base sm:text-lg text-slate-900">
-                Customer Orders Log
-              </h3>
-              <p className="text-[11px] sm:text-xs text-slate-500">Orders placed via website and forwarded to WhatsApp</p>
-            </div>
-            <span className="text-[11px] sm:text-xs font-bold bg-orange-50 text-orange-800 px-3 py-1 rounded-full border border-orange-200 self-start sm:self-auto">
-              {orders.length} Total Orders
-            </span>
-          </div>
-
-          <div className="space-y-3 sm:space-y-4">
-            {orders.map((ord) => (
-              <div key={ord.id} className="p-3.5 sm:p-5 rounded-xl sm:rounded-2xl border border-slate-200 bg-slate-50/50 space-y-2.5 sm:space-y-3">
-                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
-                  <div className="flex flex-wrap items-center gap-1.5 sm:gap-2">
-                    <span className="font-mono font-black text-xs sm:text-sm text-slate-900 bg-white px-2 py-0.5 sm:px-2.5 sm:py-1 rounded-lg border border-slate-200">
-                      {ord.id}
-                    </span>
-                    <span className="text-xs font-bold text-slate-800">{ord.customerName}</span>
-                    <span className="text-[11px] text-slate-400">({ord.phone})</span>
-                  </div>
-
-                  <div className="flex items-center gap-2">
-                    {/* Status Dropdown */}
-                    <select
-                      value={ord.status}
-                      onChange={(e) => updateOrderStatus(ord.id, e.target.value)}
-                      className="flex-1 sm:flex-initial px-2.5 py-1.5 bg-white border border-slate-200 rounded-xl text-xs font-bold text-slate-800 outline-none"
-                    >
-                      <option value="Pending WhatsApp Confirmation">⏳ Pending Confirmation</option>
-                      <option value="Confirmed & Packing">📦 Confirmed & Packing</option>
-                      <option value="In Transit">🚚 In Transit</option>
-                      <option value="Delivered">✅ Delivered</option>
-                      <option value="Cancelled">❌ Cancelled</option>
-                    </select>
-
-                    {/* WhatsApp Reply Button */}
-                    <a
-                      href={`https://wa.me/${ord.phone.replace(/[^0-9]/g, '')}?text=Hi%20${encodeURIComponent(ord.customerName)}!%20This%20is%20${encodeURIComponent(storeConfig.shopName)}%20regarding%20order%20${ord.id}.%20Your%20delivery%20status%20is:%20${encodeURIComponent(ord.status)}.`}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="p-2 bg-slate-900 text-white rounded-xl text-xs font-bold flex items-center gap-1 shadow-sm hover:bg-black transition shrink-0 active:scale-95"
-                      title="Chat with Customer on WhatsApp"
-                    >
-                      <Phone className="w-3.5 h-3.5 text-emerald-400" />
-                      <span className="hidden sm:inline">WhatsApp</span>
-                    </a>
-                  </div>
-                </div>
-
-                <div className="text-[11px] sm:text-xs text-slate-600">
-                  <span className="font-semibold text-slate-700">Address:</span> {ord.address}
-                </div>
-
-                {/* Items chips */}
-                <div className="flex flex-wrap gap-1.5 pt-0.5">
-                  {ord.items.map((item, i) => (
-                    <span key={i} className="bg-white px-2 py-0.5 sm:px-2.5 sm:py-1 rounded-lg border border-slate-200 text-[11px] sm:text-xs font-medium text-slate-700">
-                      {item.quantity}x {item.name} ({storeConfig.currency}{(item.price * item.quantity).toFixed(0)})
-                    </span>
-                  ))}
-                </div>
-
-                <div className="flex items-center justify-between text-xs pt-2 border-t border-slate-200 font-semibold text-slate-700">
-                  <span className="text-[11px] sm:text-xs">Pay: {ord.paymentMethod}</span>
-                  <span className="text-xs sm:text-sm font-black text-orange-800 font-display">
-                    Total: {storeConfig.currency}{ord.total.toFixed(0)}
-                  </span>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      )}
-
-      {/* =========================================================
-          TAB 4: CUSTOMER ENQUIRIES
+          TAB 3: CUSTOMER ENQUIRIES
          ========================================================= */}
       {adminSubTab === 'enquiries' && (
         <div className="bg-white rounded-2xl sm:rounded-3xl border border-slate-200/80 shadow-sm overflow-hidden animate-fade-in-up p-3.5 sm:p-6 space-y-3 sm:space-y-4">
