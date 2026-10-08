@@ -80,20 +80,20 @@ export const ProductModal = () => {
       onClick={() => setSelectedProduct(null)}
     >
       <div
-        className="relative w-full max-w-4xl bg-[#faf7f2] rounded-t-[32px] sm:rounded-[32px] shadow-2xl overflow-hidden border border-stone-200/90 flex flex-col md:flex-row max-h-[92vh] sm:my-auto"
+        className="relative w-full max-w-4xl bg-white rounded-t-[32px] sm:rounded-[32px] shadow-2xl overflow-hidden border border-stone-200 flex flex-col md:flex-row max-h-[92vh] sm:my-auto"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Floating Close Button */}
         <button
           onClick={() => setSelectedProduct(null)}
-          className="absolute top-3 right-3 z-30 w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-white/90 hover:bg-stone-900 hover:text-white text-stone-700 backdrop-blur-md flex items-center justify-center transition-all duration-200 shadow-sm border border-stone-200 active:scale-95"
+          className="absolute top-3.5 right-3.5 z-30 w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-stone-100/90 hover:bg-stone-900 hover:text-white text-stone-700 backdrop-blur-md flex items-center justify-center transition-all duration-200 shadow-xs border border-stone-200 active:scale-95"
           aria-label="Close dialog"
         >
           <X className="w-4 h-4 sm:w-5 sm:h-5" />
         </button>
 
-        {/* Left / Top Showcase: Seamless Product Visual Frame */}
-        <div className="md:w-5/12 bg-gradient-to-b from-[#f8f4ee] via-[#f3ebe0] to-[#eae0d2] p-4 sm:p-6 flex flex-col justify-between shrink-0 md:border-r border-stone-200/80">
+        {/* Left / Top Showcase: Unified Product Visual Area */}
+        <div className="md:w-5/12 bg-white md:bg-stone-50/60 p-4 sm:p-6 flex flex-col justify-between shrink-0 md:border-r border-stone-100">
           
           {/* Top Quick Actions (Category & Action Icons) */}
           <div className="flex items-center justify-between pr-10 sm:pr-0">
@@ -104,14 +104,14 @@ export const ProductModal = () => {
             <div className="flex items-center gap-1.5">
               <button
                 onClick={handleShare}
-                className="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-white/90 hover:bg-white text-stone-700 hover:text-orange-600 flex items-center justify-center shadow-xs border border-stone-200/80 transition hover:scale-105 active:scale-95"
+                className="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-stone-100 hover:bg-stone-200 text-stone-700 hover:text-orange-600 flex items-center justify-center shadow-xs border border-stone-200/80 transition hover:scale-105 active:scale-95"
                 title="Share product link"
               >
                 <Share2 className="w-3.5 h-3.5" />
               </button>
               <button
                 onClick={() => toggleWishlist(selectedProduct)}
-                className="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-white/90 hover:bg-white text-stone-700 hover:text-rose-500 flex items-center justify-center shadow-xs border border-stone-200/80 transition hover:scale-105 active:scale-95"
+                className="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-stone-100 hover:bg-rose-50 text-stone-700 hover:text-rose-500 flex items-center justify-center shadow-xs border border-stone-200/80 transition hover:scale-105 active:scale-95"
                 title="Save to Wishlist"
               >
                 <Heart className={`w-3.5 h-3.5 ${isWishlisted ? 'text-rose-500 fill-rose-500' : ''}`} />
@@ -121,7 +121,7 @@ export const ProductModal = () => {
 
           {/* Product Image Frame */}
           <div className="py-2.5 sm:py-4 my-auto flex items-center justify-center w-full">
-            <div className="w-full max-w-[320px] sm:max-w-none h-44 sm:h-64 rounded-2xl overflow-hidden shadow-md border border-stone-300/70 bg-white p-2 flex items-center justify-center group">
+            <div className="w-full max-w-[340px] sm:max-w-none h-48 sm:h-64 rounded-2xl overflow-hidden shadow-xs border border-stone-200 bg-stone-50 p-1 flex items-center justify-center group">
               <img
                 src={selectedProduct.image}
                 alt={selectedProduct.name}
@@ -131,7 +131,7 @@ export const ProductModal = () => {
           </div>
 
           {/* Micro Trust Indicators Row */}
-          <div className="grid grid-cols-3 gap-1 text-center text-[10px] text-stone-600 bg-white/80 backdrop-blur-sm py-1.5 px-2 rounded-xl border border-stone-200/90 shadow-xs">
+          <div className="grid grid-cols-3 gap-1 text-center text-[10px] text-stone-600 bg-stone-50/80 py-2 px-2 rounded-xl border border-stone-200/80">
             <div className="flex flex-col items-center gap-0.5">
               <Clock className="w-3.5 h-3.5 text-orange-600" />
               <span className="font-bold leading-tight">30 Min Delivery</span>
@@ -148,8 +148,8 @@ export const ProductModal = () => {
 
         </div>
 
-        {/* Right / Bottom Info Panel: Elevated Card Layer */}
-        <div className="md:w-7/12 bg-white rounded-t-[28px] md:rounded-none -mt-3 md:mt-0 p-4 sm:p-7 sm:pr-14 overflow-y-auto flex flex-col justify-between space-y-3.5 sm:space-y-5 shadow-lg md:shadow-none border-t md:border-t-0 border-stone-200/90">
+        {/* Right / Bottom Info Panel: Seamless Flow */}
+        <div className="md:w-7/12 bg-white p-4 sm:p-7 sm:pr-14 overflow-y-auto flex flex-col justify-between space-y-3.5 sm:space-y-5">
           
           <div className="space-y-3 sm:space-y-3.5">
             
