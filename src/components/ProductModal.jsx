@@ -120,8 +120,8 @@ export const ProductModal = () => {
           </div>
 
           {/* Product Image Frame */}
-          <div className="py-2.5 sm:py-4 my-auto flex items-center justify-center">
-            <div className="w-36 h-36 sm:w-64 sm:h-64 rounded-2xl overflow-hidden shadow-md border border-stone-300/70 bg-white p-2 flex items-center justify-center group">
+          <div className="py-2.5 sm:py-4 my-auto flex items-center justify-center w-full">
+            <div className="w-full max-w-[320px] sm:max-w-none h-44 sm:h-64 rounded-2xl overflow-hidden shadow-md border border-stone-300/70 bg-white p-2 flex items-center justify-center group">
               <img
                 src={selectedProduct.image}
                 alt={selectedProduct.name}
