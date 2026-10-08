@@ -258,33 +258,6 @@ export const Navbar = () => {
 
         </div>
 
-        {/* Mobile Search Bar (under header) */}
-        <div className="lg:hidden pb-3 pt-1">
-          <div className="relative w-full">
-            <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
-              <Search className="w-4 h-4" />
-            </div>
-            <input
-              type="text"
-              value={searchQuery}
-              onChange={(e) => {
-                setSearchQuery(e.target.value);
-                if (activeTab !== 'products') setActiveTab('products');
-              }}
-              placeholder="Search 30+ farm-fresh groceries..."
-              className="w-full pl-10 pr-8 py-2 bg-slate-100 border border-slate-200 rounded-xl text-xs sm:text-sm text-slate-800 placeholder-slate-400 outline-none focus:bg-white focus:border-orange-500"
-            />
-            {searchQuery && (
-              <button
-                onClick={() => setSearchQuery('')}
-                className="absolute inset-y-0 right-0 pr-3 flex items-center text-slate-400"
-              >
-                <X className="w-3.5 h-3.5" />
-              </button>
-            )}
-          </div>
-        </div>
-
       </div>
 
       {/* Mobile Drawer Menu */}
